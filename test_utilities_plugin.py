@@ -8,30 +8,22 @@ class HelloWorldTest(unittest.TestCase):
     @staticmethod
     def test_serialization():
         plugin.test_object_serialization(
-            utilities_plugin.SuccessOutputUUID(
-                "ABCD-EFGH-IJKL"
-            )
+            utilities_plugin.SuccessOutputUUID("ABCD-EFGH-IJKL")
         )
 
         plugin.test_object_serialization(
-            utilities_plugin.ErrorOutput(
-                exit_code=1,
-                error="This is an error"
-            )
+            utilities_plugin.ErrorOutput(exit_code=1, error="This is an error")
         )
 
     def test_functional(self):
 
-        input= utilities_plugin.InputParams()
+        input = utilities_plugin.InputParams()
         output_id, output_data = utilities_plugin.generate_uuid(input)
 
         # The example plugin always returns an error:
         self.assertEqual("success", output_id)
-        self.assertIsNotNone(
-            output_data.uuid
-        )
-        
+        self.assertIsNotNone(output_data.uuid)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
