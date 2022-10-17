@@ -37,11 +37,14 @@ class ErrorOutput:
     exit_code: int = field(
         metadata={
             "name": "Exit Code",
-            "description": "Exit code returned by the program in case of a failure",
+            "description": "Exit code returned in case of a failure",
         }
     )
     error: str = field(
-        metadata={"name": "Failure Error", "description": "Reason for failure"}
+        metadata={
+            "name": "Failure Error",
+            "description": "Reason for failure",
+        }
     )
 
 
