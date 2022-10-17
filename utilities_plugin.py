@@ -21,7 +21,10 @@ class SuccessOutputUUID:
     """
 
     uuid: str = field(
-        metadata={"name": "UUID", "description": "UUID generated for a workload run"}
+        metadata={
+            "name": "UUID",
+            "description": "UUID generated for a workload run",
+        }
     )
 
 
@@ -59,8 +62,13 @@ def generate_uuid(
         uuid = uuid.strip()
 
         return "success", SuccessOutputUUID(uuid)
-    except:
-        return "error", ErrorOutput(1, "Failure generating UUID")
+    except subprocess.CalledProcessError as error:
+        return "error", ErrorOutput(
+            error.returncode,
+            "{} failed with return code {}:\n{}".format(
+                error.cmd[0], error.returncode, error.output
+            ),
+        )
 
 
 if __name__ == "__main__":
